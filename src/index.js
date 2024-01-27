@@ -1,11 +1,22 @@
 import dotenv from "dotenv";
 import connectDB from "./DB/index.js";
+import App from "./App.js";
 
 dotenv.config({
   path: "./.env",
 });
 
-connectDB();
+connectDB()
+
+.then(()=> {
+        
+            App.listen(process.env.PORT || 8000, () => {
+              console.log(`App is listening on port ${process.env.PORT || 8000}`);
+            });
+})
+.catch((error)=>{
+    console.error("Error", error);
+})
 
 // Uncomment the following lines when you are ready to use Express
 // import express from "express";
